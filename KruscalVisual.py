@@ -123,6 +123,9 @@ def calulate_tree():
     for node in G.nodes:
         nx.draw_networkx_labels(G, pos, labels={node: node}, font_color='red', font_size=14)
 
+    # Dibujar las aristas del árbol en morado
+    nx.draw_networkx_edges(G, pos, edgelist=tree, edge_color='purple', width=3)
+
     # Mostrar la figura
     plt.show()
 
