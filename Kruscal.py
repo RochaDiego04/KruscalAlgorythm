@@ -51,5 +51,5 @@ def print_tree(tree):
         print(f"{u} -- {v}, peso {w}")
 
 
-tree = kruskal(5, edges)
-print_tree(tree)
+'''tree = kruskal(5, edges)
+print_tree(tree)'''

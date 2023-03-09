@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from Kruscal import kruskal
 
 # Crear ventana
 root = tk.Tk()
@@ -26,10 +27,10 @@ nodes = []
 
 
 # Funcion para agregar fila a la tabla
-def add():
-    node_a = node_a_entry.get()
-    node_b = node_b_entry.get()
-    weight = weight_entry.get()
+def add():  # Los numeros ingresados deben ser convertidos a enteros para que el algoritmo los pueda usar
+    node_a = int(node_a_entry.get())
+    node_b = int(node_b_entry.get())
+    weight = int(weight_entry.get())
 
     # Crear un tuple con los datos y agregarlo a la lista de nodos
     node = (node_a, node_b, weight)
@@ -83,7 +84,13 @@ def on_confirm_n():
 
 
 def calulate_tree():
-    pass
+    if len(nodes) == 0:
+        print("La lista de nodos está vacía")
+        return
+
+    n = int(n_entry.get())
+    tree = kruskal(n + 1, nodes)  # Necesitamos pasarle la cantidad de nodos +1 para que no se rompa el algoritmo
+    print("Arbol mínimo:", tree)
 
 
 # Ocultar el formulario
