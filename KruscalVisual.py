@@ -3,6 +3,9 @@ from tkinter import ttk
 from tkinter import messagebox
 from Kruscal import kruskal
 
+import networkx as nx
+import matplotlib.pyplot as plt
+
 # Crear ventana
 root = tk.Tk()
 root.title("Algoritmo de Kruskal")
@@ -38,10 +41,6 @@ def add():  # Los numeros ingresados deben ser convertidos a enteros para que el
         if (node_a == n[0] and node_b == n[1]) or (
                 node_a == n[1] and node_b == n[0]):  # Compara las entradas con cada nodo ya ingresado
             messagebox.showerror("Error", "La arista ya existe en la tabla")
-            return
-        # Verificar que los nodos no sean mayores al numero de nodos
-        if node_a > len(nodes) or node_b > len(nodes):
-            messagebox.showerror("Error", "El número de nodo ingresado es mayor a la cantidad de nodos existentes")
             return
 
     # Crear un tuple con los datos y agregarlo a la lista de nodos
@@ -103,6 +102,29 @@ def calulate_tree():
     n = int(n_entry.get())
     tree = kruskal(n + 1, nodes)  # Necesitamos pasarle la cantidad de nodos +1 para que no se rompa el algoritmo
     print("Arbol mínimo:", tree)
+
+    # Crear el grafo
+    G = nx.Graph()
+    for node in nodes:
+        G.add_node(node[0])
+        G.add_node(node[1])
+        G.add_edge(node[0], node[1], weight=node[2])
+
+    # Crear la figura y el plot
+    fig, ax = plt.subplots(figsize=(8, 8))
+
+    # Dibujar el grafo
+    pos = nx.spring_layout(G, seed=42) # Obtener las posiciones de los nodos
+    nx.draw_networkx_nodes(G, pos, ax=ax, node_color='lightblue', node_size=1000)
+    nx.draw_networkx_edges(G, pos, ax=ax, width=2, edge_color='grey')
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'weight'), ax=ax, font_size=14)
+
+    # Dibujar los números de los nodos en rojo
+    for node in G.nodes:
+        nx.draw_networkx_labels(G, pos, labels={node: node}, font_color='red', font_size=14)
+
+    # Mostrar la figura
+    plt.show()
 
 
 # Ocultar el formulario
