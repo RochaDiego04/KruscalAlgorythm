@@ -1,3 +1,4 @@
+
 edges = [
     (1, 2, 5),  # Nodo 1 conectado a nodo 2 con peso de 5
     (1, 3, 1),

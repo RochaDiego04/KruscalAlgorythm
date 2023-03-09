@@ -24,6 +24,7 @@ table.heading("weight", text="Peso")
 # Lista para almacenar los nodos
 nodes = []
 
+
 # Funcion para agregar fila a la tabla
 def add():
     node_a = node_a_entry.get()
@@ -42,6 +43,10 @@ def add():
     node_a_entry.delete(0, tk.END)
     node_b_entry.delete(0, tk.END)
     weight_entry.delete(0, tk.END)
+
+    # Validar si hay al menos un elemento en la lista de nodos para habilitar el botón calcular arbol
+    if len(nodes) > 0:
+        calculate_button.config(state=tk.ACTIVE)
 
 
 # Creacion del formulario
@@ -77,6 +82,10 @@ def on_confirm_n():
         print("Introduzca un número entero válido")
 
 
+def calulate_tree():
+    pass
+
+
 # Ocultar el formulario
 node_a_label.pack_forget()
 node_a_entry.pack_forget()
@@ -93,7 +102,13 @@ table_frame.pack_forget()
 confirm_button = tk.Button(root, text="Confirmar", command=on_confirm_n)
 confirm_button.pack()
 
+# Creacion del boton Calcular arbol mínimo
+calculate_button = tk.Button(root, text="Calcular arbol mínimo", command=calulate_tree)
+calculate_button.pack()
+calculate_button.config(state=tk.DISABLED)
+
 table.pack()
 table_frame.pack()
 
+# Ejecucion de la ventana
 root.mainloop()
