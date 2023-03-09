@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 from Kruscal import kruskal
 
 # Crear ventana
@@ -31,6 +32,17 @@ def add():  # Los numeros ingresados deben ser convertidos a enteros para que el
     node_a = int(node_a_entry.get())
     node_b = int(node_b_entry.get())
     weight = int(weight_entry.get())
+
+    for n in nodes:
+        # Verificar si la arista ya existe en la lista de nodos
+        if (node_a == n[0] and node_b == n[1]) or (
+                node_a == n[1] and node_b == n[0]):  # Compara las entradas con cada nodo ya ingresado
+            messagebox.showerror("Error", "La arista ya existe en la tabla")
+            return
+        # Verificar que los nodos no sean mayores al numero de nodos
+        if node_a > len(nodes) or node_b > len(nodes):
+            messagebox.showerror("Error", "El número de nodo ingresado es mayor a la cantidad de nodos existentes")
+            return
 
     # Crear un tuple con los datos y agregarlo a la lista de nodos
     node = (node_a, node_b, weight)
