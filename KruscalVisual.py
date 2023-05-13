@@ -36,6 +36,13 @@ def add():  # Los numeros ingresados deben ser convertidos a enteros para que el
     node_b = int(node_b_entry.get())
     weight = int(weight_entry.get())
 
+    allowedNodes = int(n_entry.get())  # Obtener el número máximo de nodos permitidos
+
+    # Validar si los nodos están dentro del rango válido
+    if node_a < 1 or node_a > allowedNodes or node_b < 1 or node_b > allowedNodes:
+        messagebox.showerror("Error", "Los nodos deben estar dentro del rango válido")
+        return
+
     for n in nodes:
         # Verificar si la arista ya existe en la lista de nodos
         if (node_a == n[0] and node_b == n[1]) or (
@@ -76,6 +83,9 @@ add_button = tk.Button(root, text="Agregar", command=add)
 def on_confirm_n():
     try:
         n = int(n_entry.get())
+        if n <= 0:
+            messagebox.showerror("Error", "El número de nodos debe ser mayor que cero")
+            return
         print(f"El usuario introdujo {n} nodos")
 
         # Mostrar la tabla
