@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # Crear ventana
 root = tk.Tk()
 root.title("Algoritmo de Kruskal")
-root.geometry("400x400")
+root.geometry("700x700")
 
 # Crear label superior
 n_label = tk.Label(root, text="Introduzca el número de nodos:")
@@ -117,14 +117,12 @@ def calulate_tree():
     pos = nx.spring_layout(G, seed=42) # Obtener las posiciones de los nodos
     nx.draw_networkx_nodes(G, pos, ax=ax, node_color='lightblue', node_size=1000)
     nx.draw_networkx_edges(G, pos, ax=ax, width=2, edge_color='grey')
+    nx.draw_networkx_edges(G, pos, edgelist=tree, edge_color='purple', width=3) # Dibujar las aristas del árbol en morado
     nx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'weight'), ax=ax, font_size=14)
 
     # Dibujar los números de los nodos en rojo
     for node in G.nodes:
         nx.draw_networkx_labels(G, pos, labels={node: node}, font_color='red', font_size=14)
-
-    # Dibujar las aristas del árbol en morado
-    nx.draw_networkx_edges(G, pos, edgelist=tree, edge_color='purple', width=3)
 
     # Mostrar la figura
     plt.show()
